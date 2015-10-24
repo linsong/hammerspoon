@@ -201,6 +201,13 @@ end
 function hints.windowHints(windows, callback, allowNonStandard)
 
   windows = windows or window.allWindows()
+  table.sort(windows, function(w1, w2)
+    if (w1:id() == nil or w2:id() == nil) then 
+      return false; 
+    end 
+    return w1:id() < w2:id();
+  end)
+
   selectionCallback = callback
 
   if (modalKey == nil) then
